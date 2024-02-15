@@ -10,8 +10,12 @@
 
     <script>
 
-        fetch("/api-todo",{
-            method : "DELETE",
+        fetch("/api-todo/crear",{
+            method : "POST",
+            body : '{"cosa" : "valido"}',
+            headers : {
+                "Content-type" : "application/json" // --> le estoy indicando que el archivo que tiene que venir sea json
+            }
         })
         .then(respuesta => respuesta.text())
         .then(respuesta => console.log(respuesta));
