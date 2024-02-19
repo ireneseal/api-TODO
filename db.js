@@ -38,7 +38,6 @@ function getTareas(){
 function crearTareas({tarea}){
     return new Promise(async(fulfill, reject) =>{
         let conexion = conectar();
-
         try{
             let [{id}] = await conexion`INSERT INTO tareas (tarea) VALUES (${tarea}) RETURNING id`;
             conexion.end();

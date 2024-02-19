@@ -1,26 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-
-</head>
-<body>
-
+  </head>
+  <body>
     <script>
+      let tarea = "aprender chino";
 
-        fetch("/api-todo/crear",{
-            method : "POST",
-            body : '{"cosa" : "valido"}',
-            headers : {
-                "Content-type" : "application/json" // --> le estoy indicando que el archivo que tiene que venir sea json
-            }
-        })
-        .then(respuesta => respuesta.text())
-        .then(respuesta => console.log(respuesta));
-
+      fetch("/api-todo/crear", {
+        method: "POST",
+        body: JSON.stringify({ tarea }),
+        headers: {
+          "Content-type": "application/json", // --> le estoy indicando que el archivo que tiene que venir sea json
+        },
+      })
+        .then((respuesta) => respuesta.text())
+        .then((respuesta) => console.log(respuesta));
     </script>
-    
-</body>
+  </body>
 </html>
