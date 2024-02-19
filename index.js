@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const { json } = require("body-parser"); //Desestructuramos y cogemos solo el jason del body-parser porque es lo unico que vamos a necesitar
-const { getTareas, crearTareas } = require("./db");
+const { getTareas, crearTareas, borrarTarea } = require("./db");
 
 const servidor = express();
 
@@ -46,8 +46,17 @@ servidor.put("/api-todo", (peticion, respuesta) => {
   respuesta.send("metodo PUT");
 });
 
-servidor.delete("/api-todo/borrar/:", (peticion, respuesta) => {
-  respuesta.send("metodo DELETE");
+servidor.delete("/api-todo/borrar/:id", async (peticion, respuesta) => {
+  //confiamos en el usuario, más adelante incuiremos las expresiones regulares para comprobar lo que nos da el usuario
+  try {
+    let count = await borrarTarea(peticion.params.id);
+    return respuesta.json({ resultado: count ? "fulfill" : "reject" });
+  } catch (error) {
+    respuesta.status(400);
+    respuesta.json({ error: "no se pudo borrar" });
+  }
+
+  //Es necesario que indique en el js del front (index.html) --> decirle que el método es DELETE y indicar al url
 });
 
 servidor.use((peticion, respuesta) => {

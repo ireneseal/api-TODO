@@ -9,12 +9,12 @@
     <script>
       let tarea = "aprender chino";
 
-      fetch("/api-todo/crear", {
-        method: "POST",
-        body: JSON.stringify({ tarea }),
+      fetch("/api-todo/borrar/1", {
+        method: "DELETE",
+        /*body: JSON.stringify({ tarea }),
         headers: {
-          "Content-type": "application/json", // --> le estoy indicando que el archivo que tiene que venir sea json
-        },
+          "Content-type": "application/json", // --> //le estoy indicando que el archivo que tiene que venir sea json
+        },*/
       })
         .then((respuesta) => respuesta.text())
         .then((respuesta) => console.log(respuesta));
