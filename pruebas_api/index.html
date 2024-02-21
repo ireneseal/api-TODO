@@ -9,15 +9,17 @@
     <script>
       let tarea = "aprender chino";
 
-      fetch("/api-todo/borrar/1", {
-        method: "DELETE",
-        /*body: JSON.stringify({ tarea }),
+      fetch("/api-todo/actualizar/3/1", {
+        method: "PUT",
+        body: JSON.stringify({ tarea: "nueva tarea" }),
         headers: {
           "Content-type": "application/json", // --> //le estoy indicando que el archivo que tiene que venir sea json
-        },*/
+        },
       })
         .then((respuesta) => respuesta.text())
         .then((respuesta) => console.log(respuesta));
+
+      
     </script>
   </body>
 </html>
