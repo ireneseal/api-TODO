@@ -1,0 +1,52 @@
+Las expresiones regulares son un patrón que definen una cadena de caracteres
+(regex) --> regular expressions
+
+Tienen 2 formas de trabajar:
+    MATCH --> buscar apac¡riciones de un patrón en un string y en la mayoría de los casos retornándolas (método de los STRINGS)
+
+    TEST --> comprobar si un string encaja con un patrón (método de las REGEX)
+
+delimitada por // --> /regex/
+
+flags funcionales 
+
+    i --> case insensitive -- de esta forma no hace caso a si hay mayusculas, minusculas etc...
+    g --> global
+    ^ --> representa el inicio del input (inicio de la cadena)
+    $ --> representa el final del input (final de la cadena)
+
+conjuntos --> [] --> todos los posibles caracteres que podrían aparecer en una posición del patrón
+
+conjuntos --> [] --> TODOS los posibles caracteres que podrian aparecer en una posicion del patrón
+conjuntos negativo --> [âsqw] --> cualquier caracter MENOS estos
+en los conjuntos existen RANGOS --> [a-z]
+caracter opcional --> ? --> el caracter anterior es opcional
+indica que el caracter anterior puede estar más de una vez --> +
+
+repeticiones --> {min,max} 
+
+CARACTERES ESPECIALES --> . --> representa cualquier caracter
+
+\ --> acticar/desactivar la funcion/significado original del caracter --> como un toggle
+
+\s ---> espacio, aunque algunos motores lo desactivan y no sirve para nada
+\t --> tabulador
+\. --> caracter punto (punto literal)
+\? --> interrogacion literal
+\+ --> suma literal
+\* --> asterisco literal --> el caracter puede o no estar, pero en el caso de estar, puede estar todas las veces que sea
+\b --> boundry, en donde aparezca en la expresion regular, representa un límite  (antes de donde pongamos el \b tiene que haber un caracter vacio (espacio) o nada)--> "espacio" entre "palabras" --> "hola| |vjesbfvwke| |kjsdf|"
+
+grupos --> ()
+condicional --> | (representa un OR)
+
+/////////////////////////////////////////////////////
+
+TODO METODO  de los string que utilice argumentos "string", realmente está utilizando expresiones regulares
+
+STRING.replace(lo que quiero sustituir, el sustituto)
+STRING.replace(regex, el ssutituto o un callback que retorna el sustituto)
+el callback recibe eñ MATCH (lo que encontró la expresion)
+
+new RegExp(string con la expresion, string con las flags) --> esto retorna una expresion regular
+
