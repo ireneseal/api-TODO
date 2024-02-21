@@ -46,7 +46,8 @@ servidor.put("/api-todo", (peticion, respuesta) => {
   respuesta.send("metodo PUT");
 });
 
-servidor.delete("/api-todo/borrar/:id", async (peticion, respuesta) => {
+//Incluimos las expresiones regulares para poder filtrar las respuestas y que el usuario no pueda poner cualquier cosa
+servidor.delete("/api-todo/borrar/:id([0-9]+)", async (peticion, respuesta) => {
   //confiamos en el usuario, más adelante incuiremos las expresiones regulares para comprobar lo que nos da el usuario
   try {
     let count = await borrarTarea(peticion.params.id);
