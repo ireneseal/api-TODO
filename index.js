@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const { json } = require("body-parser"); //Desestructuramos y cogemos solo el jason del body-parser porque es lo unico que vamos a necesitar
+const cors = require("cors");
 const {
   getTareas,
   crearTareas,
@@ -12,6 +13,8 @@ const {
 const servidor = express();
 
 ////////////////////////////// MIDDLEWARE //////////////////////////////
+
+servidor.use(cors());
 
 servidor.use(json()); //esto intercepta cualquier peticion (porque no tiene una url especifica) y crea un objeto. Si no estamos enviando nada (es decir Content type : Application / json), el objeto queda vacio. Y va una a una pasando al resto de funciones (el body-parser ya tiene integrada la funcion siguiente)
 
@@ -49,7 +52,7 @@ servidor.post("/api-todo/crear", async (peticion, respuesta, siguiente) => {
 });
 
 servidor.put(
-  "/api-todo/actualizar/:id([0-9]+)/:operacion([1|2])",
+  "/api-todo/actualizar/:id([0-9]+)/:operacion(1|2)",
   async (peticion, respuesta, siguiente) => {
     console.log("nuevo texto");
     let operacion = Number(peticion.params.operacion);
@@ -63,7 +66,7 @@ servidor.put(
         respuesta.status(500);
         return respuesta.json(error);
       }
-    } else if (operacion === 2 && tarea && tarea.trim() != "") {
+    } else if (operacion === 2) {
       try {
         let count = await actualizarEstado(peticion.params.id);
         return respuesta.json({ resultado: count ? "fulfill" : "reject" });
@@ -75,6 +78,29 @@ servidor.put(
     siguiente({ error: "falta el argumento de la tarea en el objeto JSON" });
   }
 );
+
+///////////////////////// OPCION 2 //////////////////////////////////////
+
+/*let operacion = Number(peticion.params.operacion);
+let operaciones = [actualizarTexto, actualizarEstado];
+let { tarea } = peticion.body;
+
+if (operacion == 1 && (!tarea || tarea.trim() == "")) {
+  return siguiente({
+    error: "falta el argumento de la tarea en el objeto JSON",
+  });
+}
+
+try {
+  let count = await operaciones[operacion - 1](
+    peticion.params.id,
+    operacion == 1 ? tarea : null
+  );
+  respuesta.json({ resultado: count ? "fulfill" : "reject" });
+} catch (error) {
+  respuesta.status(500);
+  respuesta.json(error);
+}*/
 
 //Incluimos las expresiones regulares para poder filtrar las respuestas y que el usuario no pueda poner cualquier cosa
 servidor.delete("/api-todo/borrar/:id([0-9]+)", async (peticion, respuesta) => {
