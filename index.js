@@ -17,7 +17,7 @@ const servidor = express();
 servidor.use(cors());
 
 servidor.use(json()); //esto intercepta cualquier peticion (porque no tiene una url especifica) y crea un objeto. Si no estamos enviando nada (es decir Content type : Application / json), el objeto queda vacio. Y va una a una pasando al resto de funciones (el body-parser ya tiene integrada la funcion siguiente)
-
+servidor.use( express.static("./estaticos"));
 servidor.use("/prueba", express.static("./pruebas_api")); //En este caso el método no es ni GET, ni POST ... sino un método genérico. Si la url que me ha entrado es /prueba y yo tengo un fichero index.js en la carpeta, se muestra. Sino salta al siguiente middleware (los específicos)
 
 servidor.get("/api-todo", async (peticion, respuesta) => {

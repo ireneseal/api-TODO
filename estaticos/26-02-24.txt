@@ -1,0 +1,14 @@
+load balancing --> Para API's que tengan mucha carga de peticiones por segundo. Este proceso lo que hace es organizar y pasar peticiones según estén los servidores
+
+kubernetes --> containers que crean clones en caso de que algo caiga. De esta forma, webs como Inditex o Amazon, tienen sistemas de recuperación para que no se caigan las APIS
+
+Reverse PROXY
+
+APACHE | NGINEX --> Servir ficheros estáticos
+
+NGINX --> Se utiliza como load balancing --> EN mi ordenador instalo NGINX con el certificado de seguridad y así tengo mi sistema escuchando en el puerto :443 directamente --> Que es https --> de esta forma el usuario no tiene que escribir el puerto despues del nombre del dominio en la url. NGINX es un "representante" de nuestro backend, y redirige la petición al puerto que sea necesario
+
+
+External database url
+
+postgres://tareas_1nas_user:TfZ3ciLdg8jouI4mxHDQ8ZoItvT2BfWz@dpg-cne88omn7f5s73bom080-a.frankfurt-postgres.render.com/tareas_1nas
